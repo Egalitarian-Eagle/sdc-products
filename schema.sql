@@ -1,9 +1,12 @@
+DROP DATABASE test;
+CREATE DATABASE test;
+
 CREATE TABLE products (
   product_id integer PRIMARY KEY,
-  name varchar(80),
-  slogan varchar(200),
-  description varchar(300),
-  category varchar(80),
+  name varchar(100),
+  slogan TEXT,
+  description TEXT,
+  category varchar(200),
   default_price varchar(10)
 );
 
@@ -26,8 +29,8 @@ CREATE TABLE styles (
 
 CREATE TABLE photos (
   style_id integer REFERENCES styles (style_id),
-  thumbnail_url varchar(300),
-  url varchar(300)
+  thumbnail_url TEXT,
+  url TEXT
 );
 
 CREATE TABLE skus (
@@ -41,3 +44,5 @@ CREATE TABLE related (
   product_id integer REFERENCES products(product_id),
   realted_id integer
 );
+
+COPY products FROM '/home/alan_fong/hackreactor/SDC/sdc-products/product.csv' CSV HEADER;
