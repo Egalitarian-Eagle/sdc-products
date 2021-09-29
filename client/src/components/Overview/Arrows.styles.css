@@ -1,0 +1,76 @@
+body {
+  background: #111;
+}
+
+.arrowbtn {
+  width: 60px;
+  height: 60px;
+  border-radius: 100px;
+  cursor: pointer;
+  line-height: 100px;
+  transition: all 0.25s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.7;
+}
+
+.arrowbtn:hover {
+  background: white;
+  border-color: white;
+  color: #111;
+  opacity: 1;
+}
+
+.arrowbtn:after {
+  position: relative;
+  display: inline-block;
+  content: "";
+  width: 25%;
+  height: 25%;
+}
+
+.arrowbtn-up {
+  top: 20px;
+}
+
+.arrowbtn-up:after {
+  margin-top: 6.25%;
+  border-top: 2px solid;
+  border-left: 2px solid;
+  transform: rotateZ(45deg);
+}
+
+.arrowbtn-down {
+  bottom: 20px;
+}
+
+.arrowbtn-down:after {
+  margin-top: -6.25%;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+  transform: rotateZ(45deg);
+}
+
+.arrowbtn-left {
+
+}
+
+.arrowbtn-left:after {
+  margin-left: 6.25%;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+  transform: rotateZ(135deg);
+}
+
+.arrowbtn-right {
+  top: 45vh;
+  left: 75vw;
+}
+
+.arrowbtn-right:after {
+  margin-left: -6.25%;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+  transform: rotateZ(-45deg);
+}

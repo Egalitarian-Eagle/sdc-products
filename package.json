@@ -1,0 +1,65 @@
+{
+  "name": "fec",
+  "version": "1.0.0",
+  "description": "FEC Project",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest",
+    "server": "nodemon server.js",
+    "transpile": "npx webpack --config webpack.config.js --mode development -w",
+    "lint": "eslint \"**/*.js\" \"**/*.jsx\" --ignore-pattern node_modules/ --ignore-pattern dist/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marvelous-maitake/fec.git"
+  },
+  "author": "Kody, Crystal, Yue, Josh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/marvelous-maitake/fec/issues"
+  },
+  "homepage": "https://github.com/marvelous-maitake/fec#readme",
+  "dependencies": {
+    "@babel/cli": "^7.15.4",
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.6",
+    "@babel/preset-react": "^7.14.5",
+    "@testing-library/jest-dom": "^5.14.1",
+    "axios": "^0.21.4",
+    "babel-jest": "^27.1.1",
+    "babel-loader": "^8.2.2",
+    "bootstrap": "^5.1.1",
+    "compression": "^1.7.4",
+    "express": "^4.17.1",
+    "moment": "^2.29.1",
+    "msw": "^0.35.0",
+    "node-fetch": "^3.0.0",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.2",
+    "react-bootstrap": "^2.0.0-rc.0",
+    "react-dom": "^17.0.2",
+    "react-icons": "^4.2.0",
+    "react-spring": "^9.2.4",
+    "react-test-renderer": "^17.0.2",
+    "react-toggle": "^4.1.2",
+    "react-transition-group": "^4.4.2",
+    "styled-components": "^5.3.1",
+    "webpack": "^5.52.1"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.15.0",
+    "@testing-library/dom": "^8.6.0",
+    "@testing-library/react": "^12.1.0",
+    "@testing-library/user-event": "^13.2.1",
+    "babel-plugin-styled-components": "^1.13.2",
+    "copy-webpack-plugin": "^9.0.1",
+    "css-loader": "^6.3.0",
+    "file-loader": "^6.2.0",
+    "jest": "^27.1.1",
+    "less": "^4.1.1",
+    "less-loader": "^10.0.1",
+    "regenerator-runtime": "^0.13.9",
+    "style-loader": "^3.2.1",
+    "webpack-cli": "^4.8.0"
+  }
+}
