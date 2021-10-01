@@ -11,11 +11,11 @@ app.use(express.static(path.join(__dirname, "../client/dist")));
 app.use(express.json());
 app.use(compression());
 
-app.get('/products', controllers.getProducts);
+app.get('/products/:product_id', controllers.getProducts);
 
-app.get('/products/styles', controllers.getStyles);
+app.get('/products/:product_id/styles', controllers.getStyles);
 
-app.get('/products/related', controllers.getRelated);
+app.get('/products/:product_id/related', controllers.getRelated);
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)

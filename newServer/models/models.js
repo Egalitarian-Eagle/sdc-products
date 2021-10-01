@@ -1,14 +1,16 @@
 const pool = require('../../database');
 
 module.exports = {
-  getProducts: (callback) => {
-    pool.query('SELECT * FROM products WHERE product_id=11', (error, data) => {
+  getProducts: (params, callback) => {
+    const { product_id } = params;
+    const productQuery = `SELECT * FROM products WHERE product_id=${product_id}`;
+    pool.query(productQuery, (error, data) => {
       if (error) {
         callback(error, null);
       } else {
         const information = data.rows[0];
-        // callback(null, data.rows[0]);
-        pool.query('SELECT * FROM features WHERE product_id=11', (error, data) => {
+        const featureQuery = `SELECT feature, value FROM features WHERE product_id=${product_id}`
+        pool.query(featureQuery, (error, data) => {
           if (error) {
             callback(error, null);
           } else {
@@ -20,81 +22,48 @@ module.exports = {
     })
   },
 
-  // getStyles: (callback) => {
-  //   pool.query('SELECT * FROM styles WHERE product_id=1', async (error, data) => {
-  //     if (error) {
-  //       callback(error, null);
-  //     } else {
-  //       const information = {};
-  //       information.results = data.rows;
-  //       // Add product info
-  //       // Add photos for each of the results
-  //       await information.results.forEach(async (result) => {
-  //         result.photos = await pool.query(`SELECT * FROM photos WHERE style_id=${result.style_id}`, (error, data) => {
-  //           if(error) {
-  //             console.log(error);
-  //           } else {
-  //             return data;
-  //           }
-  //         });
-  //       })
-  //       callback(null, information);
-  //     }
-  //   })
-  // },
-  getStyles: async (callback) => {
-    const information = {};
-    await pool.query('SELECT * FROM styles WHERE product_id=1')
+  getStyles: async (params, callback) => {
+    const { product_id } = params;
+    const information = { product_id: product_id };
+    const styleQuery = `SELECT style_id, name, original_price, sale_price, isDefault FROM styles WHERE product_id=${product_id}`;
+    await pool.query(styleQuery)
       .then((response) => {
         information.results = response.rows;
-      })
+      });
     await Promise.all(information.results.map(async (result) => {
-      await pool.query(`SELECT * FROM photos WHERE style_id=${result.style_id}`)
+      const { style_id } = result;
+      const photoQuery = `SELECT * FROM photos WHERE style_id=${style_id}`;
+      await pool.query(photoQuery)
         .then((response) => {
           result.photos = response.rows;
           result.skus = {};
-        })
+        });
     }))
     await Promise.all(information.results.map(async (result) => {
-      await pool.query(`SELECT * FROM skus WHERE style_id=${result.style_id}`)
+      const { style_id } = result;
+      const skuQuery = `SELECT * FROM skus WHERE style_id=${style_id}`;
+      await pool.query(skuQuery)
         .then((response) => {
-          // console.log(response.rows)
           response.rows.forEach((sku) => {
             const id = sku.sku_id;
-            // skuData[id] = sku;
             result.skus[id] = sku;
           })
-        })
+        });
     }))
     callback(null, information);
-      // .then(async (data) => {
-      //   console.log(data);
-      //   await data.results.forEach(async (result) => {
-      //     await pool.query(`SELECT * FROM photos WHERE style_id=${result.style_id}`)
-      //       .then((response) => {
-      //         result.photos = response.rows;
-      //       })
-      //   })
-      //   callback(null, data);
-      // })
-      // .then((response) => {
-      //   console.log(response);
-      // })
   },
 
-  // getPhotos: (callback) => {
-  //   pool.query('SELECT * FROM photos WHERE style_id=1')
-  // }
-
-  getRelated: (callback) => {
-    pool.query('SELECT * FROM related WHERE product_id=1', (error, data) => {
+  getRelated: (params, callback) => {
+    const { product_id } = params;
+    const relatedQuery = `SELECT * FROM related WHERE product_id=${product_id}`
+    pool.query(relatedQuery, (error, data) => {
       if (error) {
         callback(error, null);
       } else {
         const information = [];
         data.rows.forEach((result) => {
-          // Need to change the sql table (typo)
-          information.push(result.related_id);
+          const { related_id } = result;
+          information.push(related_id);
         })
         callback(null, information);
       }

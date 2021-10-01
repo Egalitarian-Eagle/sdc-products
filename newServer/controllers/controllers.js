@@ -2,7 +2,7 @@ const models = require('../models/models.js');
 
 module.exports = {
   getProducts: (req, res) => {
-    models.getProducts((err, data) => {
+    models.getProducts(req.params, (err, data) => {
       if(err) {
         res.status(500).send(err);
       } else {
@@ -12,7 +12,7 @@ module.exports = {
   },
 
   getStyles: (req, res) => {
-    models.getStyles((err, data) => {
+    models.getStyles(req.params, (err, data) => {
       if (err) {
         res.status(500).send(err);
       } else {
@@ -22,11 +22,11 @@ module.exports = {
   },
 
   getRelated: (req, res) => {
-    models.getRelated((err, data) => {
+    models.getRelated(req.params, (err, data) => {
       if (err) {
         res.status(500).send(err);
       } else {
-        res.status(500).send(data);
+        res.status(200).send(data);
       }
     })
   }
