@@ -22,8 +22,8 @@ CREATE TABLE styles (
   style_id integer PRIMARY KEY,
   product_id integer REFERENCES products (product_id),
   name varchar(80),
-  sale_price varchar(10),
-  original_price varchar(10),
+  sale_price varchar(10) DEFAULT '0',
+  original_price varchar(10) NOT NULL,
   isDefault boolean
 );
 
@@ -45,7 +45,7 @@ CREATE TABLE skus (
 CREATE TABLE related (
   id integer PRIMARY KEY,
   product_id integer REFERENCES products(product_id),
-  realted_id integer
+  related_id integer NOT NULL
 );
 
 COPY products FROM '/home/alan_fong/hackreactor/SDC/sdc-products/csv/product.csv' CSV HEADER;
