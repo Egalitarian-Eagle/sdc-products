@@ -32,7 +32,7 @@ module.exports = {
       });
     await Promise.all(information.results.map(async (result) => {
       const { style_id } = result;
-      const photoQuery = `SELECT * FROM photos WHERE style_id=${style_id}`;
+      const photoQuery = `SELECT thumbnail_url, url FROM photos WHERE style_id=${style_id}`;
       await pool.query(photoQuery)
         .then((response) => {
           result.photos = response.rows;
@@ -41,12 +41,12 @@ module.exports = {
     }))
     await Promise.all(information.results.map(async (result) => {
       const { style_id } = result;
-      const skuQuery = `SELECT * FROM skus WHERE style_id=${style_id}`;
+      const skuQuery = `SELECT sku_id, size, quantity FROM skus WHERE style_id=${style_id}`;
       await pool.query(skuQuery)
         .then((response) => {
           response.rows.forEach((sku) => {
-            const id = sku.sku_id;
-            result.skus[id] = sku;
+            const { sku_id, size, quantity } = sku;
+            result.skus[sku_id] = { size: size, quantity: quantity };
           })
         });
     }))
@@ -55,7 +55,7 @@ module.exports = {
 
   getRelated: (params, callback) => {
     const { product_id } = params;
-    const relatedQuery = `SELECT * FROM related WHERE product_id=${product_id}`
+    const relatedQuery = `SELECT related_id FROM related WHERE product_id=${product_id}`
     pool.query(relatedQuery, (error, data) => {
       if (error) {
         callback(error, null);
