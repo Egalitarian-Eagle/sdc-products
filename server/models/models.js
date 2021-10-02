@@ -38,6 +38,9 @@ module.exports = {
           result.photos = response.rows;
           result.skus = {};
         });
+      if (result.sale_price === 'null') {
+        result.sale_price = null;
+      }
     }))
     await Promise.all(information.results.map(async (result) => {
       const { style_id } = result;

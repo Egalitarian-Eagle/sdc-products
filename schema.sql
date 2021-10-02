@@ -22,7 +22,7 @@ CREATE TABLE styles (
   style_id integer PRIMARY KEY,
   product_id integer REFERENCES products (product_id) NOT NULL,
   name varchar(80) NOT NULL,
-  sale_price varchar(10) DEFAULT '0' NOT NULL,
+  sale_price varchar(10),
   original_price varchar(10) NOT NULL,
   isDefault boolean
 );

@@ -3,11 +3,11 @@ const express = require("express");
 const compression = require('compression')
 const app = express();
 const port = 3000;
-const config = require('./server/config.js');
+const config = require('../key/config.js');
 const axios = require('axios');
 const API_URL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo';
 
-app.use(express.static(path.join(__dirname, "/client/dist")));
+app.use(express.static(path.join(__dirname, "../client/dist")));
 
 app.use(express.json());
 app.use(compression());
@@ -26,7 +26,8 @@ app.get('/*', (req, res) => {
     res.send(response.data);
   })
   .catch((error) => {
-    res.sendFile(__dirname + '/client/dist/404page.html');
+    const errorUrl = path.join(__dirname, '..', '/client/dist/404page.html')
+    res.sendFile(errorUrl);
   })
 });
 
