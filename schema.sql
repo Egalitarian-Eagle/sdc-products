@@ -1,5 +1,5 @@
--- DROP DATABASE test;
-CREATE DATABASE test;
+-- DROP DATABASE productinfo;
+CREATE DATABASE productinfo;
 
 CREATE TABLE products (
   product_id integer PRIMARY KEY,
@@ -50,10 +50,10 @@ CREATE TABLE related (
 
 CREATE TABLE cart (
   id SERIAL PRIMARY KEY,
-  user integer,
+  user_id integer,
   sku_id integer REFERENCES skus (sku_id),
   count integer,
-  active boolean,
+  active boolean
 );
 
 CREATE INDEX product_id_index ON products (product_id);
@@ -62,6 +62,7 @@ CREATE INDEX styles_id_index ON styles (product_id);
 CREATE INDEX photos_id_index ON photos (style_id);
 CREATE INDEX skus_id_index ON skus (style_id);
 CREATE INDEX related_id_index ON related (product_id);
+CREATE INDEX cart_id_index on cart (user_id);
 
 COPY products FROM '/home/alan_fong/hackreactor/SDC/sdc-products/csv/product.csv' CSV HEADER;
 COPY features FROM '/home/alan_fong/hackreactor/SDC/sdc-products/csv/features.csv' CSV HEADER;
@@ -69,4 +70,3 @@ COPY styles FROM '/home/alan_fong/hackreactor/SDC/sdc-products/csv/styles.csv' C
 COPY photos FROM '/home/alan_fong/hackreactor/SDC/sdc-products/csv/photos.csv' CSV HEADER;
 COPY skus FROM '/home/alan_fong/hackreactor/SDC/sdc-products/csv/skus.csv' CSV HEADER;
 COPY related FROM '/home/alan_fong/hackreactor/SDC/sdc-products/csv/related.csv' CSV HEADER;
--- COPY cart FROM '/home/alan_fong/hackreactor/SDC/sdc-products/csv/cart.csv' CSV HEADER;

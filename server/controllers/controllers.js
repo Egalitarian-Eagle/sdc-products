@@ -32,7 +32,7 @@ module.exports = {
   },
 
   getCart: (req, res) => {
-    models.getCart((err, data) => {
+    models.getCart(req.params, (err, data) => {
       if (err) {
         res.status(500).send(err);
       } else {

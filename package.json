@@ -8,7 +8,7 @@
     "server": "nodemon server/index.js",
     "transpile": "npx webpack --config webpack.config.js --mode development -w",
     "lint": "eslint \"**/*.js\" \"**/*.jsx\" --ignore-pattern node_modules/ --ignore-pattern dist/",
-    "database": "psql < schema.sql test"
+    "database": "psql < schema.sql productinfo"
   },
   "repository": {
     "type": "git",

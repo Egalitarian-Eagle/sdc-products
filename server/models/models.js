@@ -58,7 +58,7 @@ module.exports = {
 
   getRelated: (params, callback) => {
     const { product_id } = params;
-    const relatedQuery = `SELECT related_id FROM related WHERE product_id=${product_id}`
+    const relatedQuery = `SELECT related_id FROM related WHERE product_id=${product_id}`;
     pool.query(relatedQuery, (error, data) => {
       if (error) {
         callback(error, null);
@@ -75,7 +75,7 @@ module.exports = {
 
   getCart: (params, callback) => {
     const { user_id } = params;
-    const cartQuery = `SELECT sku_id, count FROM cart WHERE user=${user_id}`;
+    const cartQuery = `SELECT sku_id, count FROM cart WHERE user_id=${user_id}`;
     pool.query(cartQuery, (error, data) => {
       if (error) {
         callback(error, null);
@@ -88,7 +88,7 @@ module.exports = {
   postCart: (params, body, callback) => {
     const { user_id } = params;
     const { sku_id, count } = body;
-    const cartQuery =`INSERT INTO cart (user, sku_id, count, binary) VALUES (${user_id}, ${sku_id}, ${count}, true)`;
+    const cartQuery =`INSERT INTO cart (user_id, sku_id, count, active) VALUES (${user_id}, ${sku_id}, ${count}, true)`;
     pool.query(cartQuery, (error, data) => {
       if (error) {
         callback(error, null);
