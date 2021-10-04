@@ -71,5 +71,30 @@ module.exports = {
         callback(null, information);
       }
     })
+  },
+
+  getCart: (params, callback) => {
+    const { user_id } = params;
+    const cartQuery = `SELECT sku_id, count FROM cart WHERE user=${user_id}`;
+    pool.query(cartQuery, (error, data) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        callback(null, data.rows);
+      }
+    })
+  },
+
+  postCart: (params, body, callback) => {
+    const { user_id } = params;
+    const { sku_id, count } = body;
+    const cartQuery =`INSERT INTO cart (user, sku_id, count, binary) VALUES (${user_id}, ${sku_id}, ${count}, true)`;
+    pool.query(cartQuery, (error, data) => {
+      if (error) {
+        callback(error, null);
+      } else {
+        callback(null, 'CREATED');
+      }
+    })
   }
 };

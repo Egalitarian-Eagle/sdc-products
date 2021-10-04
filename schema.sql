@@ -44,8 +44,16 @@ CREATE TABLE skus (
 
 CREATE TABLE related (
   id integer PRIMARY KEY,
-  product_id integer REFERENCES products(product_id),
+  product_id integer REFERENCES products (product_id),
   related_id integer NOT NULL
+);
+
+CREATE TABLE cart (
+  id SERIAL PRIMARY KEY,
+  user integer,
+  sku_id integer REFERENCES skus (sku_id),
+  count integer,
+  active boolean,
 );
 
 CREATE INDEX product_id_index ON products (product_id);
@@ -61,3 +69,4 @@ COPY styles FROM '/home/alan_fong/hackreactor/SDC/sdc-products/csv/styles.csv' C
 COPY photos FROM '/home/alan_fong/hackreactor/SDC/sdc-products/csv/photos.csv' CSV HEADER;
 COPY skus FROM '/home/alan_fong/hackreactor/SDC/sdc-products/csv/skus.csv' CSV HEADER;
 COPY related FROM '/home/alan_fong/hackreactor/SDC/sdc-products/csv/related.csv' CSV HEADER;
+-- COPY cart FROM '/home/alan_fong/hackreactor/SDC/sdc-products/csv/cart.csv' CSV HEADER;

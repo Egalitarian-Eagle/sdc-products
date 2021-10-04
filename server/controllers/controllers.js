@@ -29,5 +29,25 @@ module.exports = {
         res.status(200).send(data);
       }
     })
-  }
+  },
+
+  getCart: (req, res) => {
+    models.getCart((err, data) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.status(200).send(data);
+      }
+    })
+  },
+
+  postCart: (req, res) => {
+    models.postCart(req.params, req.body, (err, data) => {
+      if (err) {
+        res.status(501).send(err);
+      } else {
+        res.status(201).send(data);
+      }
+    })
+  },
 };

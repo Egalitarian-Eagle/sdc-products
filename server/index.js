@@ -17,6 +17,10 @@ app.get('/products/:product_id/styles', controllers.getStyles);
 
 app.get('/products/:product_id/related', controllers.getRelated);
 
+app.get('/cart/:user_id', controllers.getCart);
+
+app.post('/cart/:user_id', controllers.postCart);
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
