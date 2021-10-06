@@ -29,6 +29,9 @@ module.exports = {
     await pool.query(styleQuery)
       .then((response) => {
         information.results = response.rows;
+      })
+      .catch((error) => {
+        callback(error, null);
       });
     await Promise.all(information.results.map(async (result) => {
       const { style_id } = result;
@@ -37,6 +40,9 @@ module.exports = {
         .then((response) => {
           result.photos = response.rows;
           result.skus = {};
+        })
+        .catch((error) => {
+          callback(error, null);
         });
       if (result.sale_price === 'null') {
         result.sale_price = null;
@@ -51,6 +57,9 @@ module.exports = {
             const { sku_id, size, quantity } = sku;
             result.skus[sku_id] = { size: size, quantity: quantity };
           })
+        })
+        .catch((error) => {
+          callback(error, null);
         });
     }))
     callback(null, information);
