@@ -54,10 +54,6 @@ export default function () {
       { tags: { name: 'postCart' } },
     ],
   ]);
-
-  check(responses[4], {
-    'form data OK': (res) => JSON.parse(res.body)['form']['hello'] == 'world!',
-  });
-
+  
   sleep(1);
 }
